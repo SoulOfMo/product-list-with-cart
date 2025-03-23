@@ -1,0 +1,236 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap");
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  text-rendering: optimizeSpeed;
+  scroll-behavior: smooth;
+  font-size: 62.5%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.no-spinners::-webkit-inner-spin-button,
+.no-spinners::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+body {
+  font-family: "Red Hat Text", serif;
+  place-content: center;
+  background-color: hsl(20, 50%, 98%);
+  font-size: 1.6rem;
+}
+
+main {
+  max-height: 100vh;
+  display: flex;
+  place-content: center;
+  gap: 2rem;
+  margin: 7rem 0 0 -40px;
+}
+
+.menu-section .desserts-container {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.menu-section .desserts-container .dessert {
+  position: relative;
+}
+.menu-section .desserts-container .dessert .dessert-img img {
+  width: 210px;
+  border-radius: 10px;
+}
+.menu-section .desserts-container .dessert button.btn {
+  border: 1px solid hsl(14, 65%, 9%);
+  padding: 1.2rem 1.2rem;
+  border-radius: 50px 50px 50px 50px;
+  width: 130px;
+  display: flex;
+  transform: translateY(-20px) translateX(40px);
+  justify-content: center;
+  gap: 1.2rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background-color: #fff;
+  align-items: center;
+}
+.menu-section .desserts-container .dessert button.btn.action-btn {
+  border: none;
+  background-color: hsl(14, 86%, 42%);
+  color: #fff;
+  justify-content: space-between;
+}
+.menu-section .desserts-container .dessert button.btn.action-btn span:not(.quantity) {
+  border: 1px solid #fff;
+  border-radius: 50%;
+  padding: 2px;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+}
+.menu-section .desserts-container .dessert button.btn.action-btn span:not(.quantity) svg path {
+  fill: #fff;
+}
+.menu-section .desserts-container .dessert button.btn.action-btn span:not(.quantity):is(:active, :hover) {
+  background-color: #fff;
+}
+.menu-section .desserts-container .dessert button.btn.action-btn span:not(.quantity):is(:active, :hover) svg path {
+  fill: hsl(14, 86%, 42%);
+}
+.menu-section .desserts-container .dessert button.btn img {
+  width: 15px;
+}
+.menu-section .desserts-container .dessert .dessert-details {
+  transform: translateY(-10px);
+  display: flex;
+  font-size: 1.2rem;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.menu-section .desserts-container .dessert .dessert-details .catergory {
+  color: hsl(14, 25%, 72%);
+  font-weight: 600;
+}
+.menu-section .desserts-container .dessert .dessert-details .dessert-name {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.menu-section .desserts-container .dessert .dessert-details .price {
+  color: hsl(14, 86%, 42%);
+  font-weight: 700;
+}
+
+.cart-container {
+  background-color: #fff;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  width: 285px;
+  border-radius: 10px;
+  padding: 1rem 1.5rem 2.5rem;
+  margin-top: 2rem;
+}
+.cart-container h2 {
+  color: hsl(14, 86%, 42%);
+  font-size: 1.8rem;
+}
+.cart-container .empty-cart {
+  margin: 1rem 5rem 2.5rem;
+}
+.cart-container .empty-cart img {
+  width: 100px;
+  margin: 20px auto 10px;
+}
+.cart-container .empty-cart p {
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 600;
+  color: hsl(7, 20%, 60%);
+}
+.cart-container .cartedItems {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+.cart-container .cartedItems p {
+  color: hsl(14, 65%, 9%);
+  font-weight: 600;
+}
+.cart-container .cartedItems .item-details {
+  display: flex;
+  gap: 1em;
+}
+.cart-container .cartedItems .item-details span:nth-child(1) {
+  color: hsl(14, 86%, 42%);
+  font-weight: 600;
+}
+.cart-container .cartedItems .item-details span:nth-child(2) {
+  color: hsl(7, 20%, 60%);
+}
+.cart-container .cartedItems .item-details span:nth-child(3) {
+  color: hsl(12, 20%, 44%);
+  font-weight: 600;
+}
+.cart-container .cartedItems .btn-delete {
+  background-color: transparent;
+  border: 1px solid hsl(12, 20%, 44%);
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart-container .confirm-order {
+  margin-top: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.cart-container .confirm-order .total {
+  display: flex;
+  justify-content: space-between;
+}
+.cart-container .confirm-order .total .total-price {
+  color: hsl(14, 65%, 9%);
+  font-weight: 700;
+  font-size: 2rem;
+}
+.cart-container .confirm-order .type-of-delivery {
+  font-size: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  background-color: hsl(13, 31%, 94%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.2rem;
+}
+.cart-container .confirm-order .type-of-delivery span {
+  color: hsl(14, 65%, 9%);
+  font-weight: 600;
+}
+.cart-container .confirm-order button {
+  width: 100%;
+  padding: 1.2rem 1.2rem;
+  text-align: center;
+  border: none;
+  border-radius: 2.4rem;
+  background-color: hsl(14, 86%, 42%);
+  color: hsl(20, 50%, 98%);
+  font-weight: 600;
+}/*# sourceMappingURL=styles.css.map */
