@@ -25,7 +25,7 @@ export default function Cart({cartItems, onDeleteCartItem, handleCheckOut}) {
         <EmptyCart cartItems={cartedItems} />
       )}
 
-      {cartItems.length > 0 && (
+      {totalOrderPrice > 0 && (
         <ConfirmOrder
           handleCheckOut={handleCheckOut}
           totalOrderPrice={totalOrderPrice}
