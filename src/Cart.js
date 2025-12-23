@@ -1,15 +1,13 @@
-import { AddedToCart } from "./AddedToCart";
+import {AddedToCart} from "./AddedToCart";
 import EmptyCart from "./EmptyCart";
 import ConfirmOrder from "./ConfirmOrder";
 
-export default function Cart({ cartItems, onDeleteCartItem }) {
-  const cartedItems = cartItems.filter((item) => item.quantity > 0);
-  const totalOrder = cartItems.reduce(
-    (acc, cur, id, arr) => acc + cur.totalPrice,
+export default function Cart({cartItems, onDeleteCartItem, handleCheckOut}) {
+  const totalOrderPrice = cartItems.reduce(
+    (acc, cur) => acc + cur.totalPrice,
     0
   );
-
-  console.log(totalOrder);
+  const cartedItems = cartItems.filter((item) => item.quantity > 0);
 
   return (
     <div className="cart-container">
@@ -27,7 +25,12 @@ export default function Cart({ cartItems, onDeleteCartItem }) {
         <EmptyCart cartItems={cartedItems} />
       )}
 
-      {cartItems.length > 0 && <ConfirmOrder totalOrder={totalOrder} />}
+      {cartItems.length > 0 && (
+        <ConfirmOrder
+          handleCheckOut={handleCheckOut}
+          totalOrderPrice={totalOrderPrice}
+        />
+      )}
     </div>
   );
 }

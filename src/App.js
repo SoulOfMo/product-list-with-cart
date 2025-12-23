@@ -1,45 +1,104 @@
 import Menu from "./Menu";
 import Cart from "./Cart";
-import { useState } from "react";
+import {useState} from "react";
+import Overlay from "./Overlay";
 
 function App() {
-  const [CartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [checkOut, setCheckOut] = useState(false);
 
-  function addToCart(newItem) {
-    setCartItems((cartItems) => {
-      // Check if the item already exists in the cart
-      const existingItem = cartItems.findIndex(
-        (item) => item.id === newItem.id
-      );
-      // If the item exists, update its quantity and total price
-      if (existingItem !== -1) {
-        const updatedCartItem = [...cartItems];
-        updatedCartItem[existingItem] = {
-          ...updatedCartItem[existingItem],
-          price: newItem.price,
-          quantity: newItem.quantity,
-          totalPrice: newItem.quantity * newItem.price,
-        };
-        return updatedCartItem;
-      } else {
-        // If the item doesn't exist, add it to the cart
-        return [...cartItems, newItem];
-      }
-    });
+  function handleCheckOut() {
+    setCheckOut((prev) => !prev);
   }
 
-  function handleRemoveFromCart(id) {
+  // function addToCart(item, qty = 1) {
+  //   setCartItems((prevCart) => {
+  //     const existing = prevCart.find((i) => i.id === item.id);
+
+  //     if (existing) {
+  //       const newQty = existing.quantity + qty;
+  //       return prevCart.map((i) =>
+  //         i.id === item.id
+  //           ? {
+  //               ...i,
+  //               quantity: newQty,
+  //               totalPrice: newQty * i.price,
+  //             }
+  //           : i
+  //       );
+  //     }
+
+  //     // new item (menu item)
+  //     return [
+  //       ...prevCart,
+  //       {
+  //         ...item,
+  //         quantity: qty,
+  //         totalPrice: item.price * qty,
+  //       },
+  //     ];
+  //   });
+  // }
+
+  function addToCart(newItem, qty = 1) {
+    setCartItems((prevCart) =>
+      prevCart.some((item) => item.id === newItem.id)
+        ? prevCart.map((item) =>
+            item.id === newItem.id
+              ? {
+                  ...item,
+                  quantity: item.quantity + 1,
+                  totalPrice: (item.quantity + 1) * item.price,
+                }
+              : item
+          )
+        : [
+            ...prevCart,
+            {...newItem, quantity: qty, totalPrice: newItem.price * qty},
+          ]
+    );
+  }
+
+  function removeFromCart(item) {
+    setCartItems((prevCart) =>
+      prevCart.map((itemInCart) =>
+        itemInCart.id === item.id
+          ? {
+              ...itemInCart,
+              quantity: itemInCart.quantity - 1,
+              totalPrice: (itemInCart.quantity - 1) * itemInCart.price,
+            }
+          : itemInCart
+      )
+    );
+  }
+
+  function deleteFromCart(id) {
     setCartItems((cartItems) => cartItems.filter((item) => item.id !== id));
+  }
+
+  function clearCart() {
+    setCartItems([]);
+    setCheckOut(false);
   }
 
   return (
     <main>
       <Menu
         handleAddToCart={addToCart}
-        cartedItems={CartItems}
-        onDeleteCartItem={handleRemoveFromCart}
+        handleRemoveFromCart={removeFromCart}
+        cartedItems={cartItems}
+        onDeleteCartItem={deleteFromCart}
       />
-      <Cart cartItems={CartItems} onDeleteCartItem={handleRemoveFromCart} />
+
+      <Cart
+        cartItems={cartItems}
+        onDeleteCartItem={deleteFromCart}
+        handleCheckOut={handleCheckOut}
+      />
+      {checkOut && (
+        <Overlay handleStartNewOrder={clearCart} cartItems={cartItems} />
+      )}
     </main>
   );
 }

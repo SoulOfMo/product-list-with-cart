@@ -1,18 +1,18 @@
 import itemData from "./data.json";
-import { Dessert } from "./Dessert";
+import {Dessert} from "./Dessert";
 
-function Menu({ handleAddToCart, cartedItems, onDeleteCartItem }) {
+function Menu({handleRemoveFromCart, handleAddToCart, cartedItems}) {
   return (
     <div className="menu-section">
       <h1>Desserts</h1>
       <div className="desserts-container">
-        {itemData.map((item, i) => (
+        {itemData.map((item) => (
           <Dessert
             handleAddToCart={handleAddToCart}
+            handleRemoveFromCart={handleRemoveFromCart}
             item={item}
             key={item.id}
-            cartedItems={cartedItems}
-            onDeleteCartItem={onDeleteCartItem}
+            cart={cartedItems}
           />
         ))}
       </div>
