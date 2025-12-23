@@ -26,13 +26,17 @@
     display: flex;
     justify-content: space-between;
     margin: 1rem 0;
+    align-items: center;
     p {
       color: $rose-900;
       font-weight: $ff-n;
+      font-size: 1.4rem;
     }
     .item-details {
+      margin-top: 0.4rem;
       display: flex;
       gap: 1em;
+      font-size: 1.2rem;
       span:nth-child(1) {
         color: $red;
         font-weight: $ff-n;
@@ -49,51 +53,21 @@
       background-color: transparent;
       border: 1px solid $rose-500;
       border-radius: 50%;
-      width: 12px;
-      height: 12px;
+      width: 15px;
+      height: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      // place-content: center;
+      padding: 0.2rem;
+      &:is(:active, :hover) {
+        border: 1.5px solid $rose-900;
+        svg path {
+          fill: $rose-900;
+        }
+      }
     }
   }
-
-  .confirm-order {
-    margin-top: 2.4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    .total {
-      display: flex;
-      justify-content: space-between;
-      .total-price {
-        color: $rose-900;
-        font-weight: $ff-b;
-        font-size: 2rem;
-      }
-    }
-    .type-of-delivery {
-      font-size: 1.2rem;
-      padding: 0.8rem 1.2rem;
-      background-color: $rose-100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 1.2rem;
-      span {
-        color: $rose-900;
-        font-weight: $ff-n;
-      }
-    }
-    button {
-      width: 100%;
-      padding: 1.2rem 1.2rem;
-      text-align: center;
-      border: none;
-      border-radius: 2.4rem;
-      background-color: $red;
-      color: $rose-50;
-      font-weight: $ff-n;
-    }
+  hr {
+    border: 1px solid $rose-100;
   }
 }

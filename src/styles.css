@@ -61,12 +61,89 @@ main {
   gap: 2rem;
   margin-top: 7rem;
 }
+@media (max-width: 450px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+    max-height: unset;
+  }
+}
+main .confirm-order {
+  margin-top: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+main .confirm-order .total {
+  display: flex;
+  justify-content: space-between;
+}
+main .confirm-order .total .total-price {
+  color: hsl(14, 65%, 9%);
+  font-weight: 700;
+  font-size: 2rem;
+}
+main .confirm-order .type-of-delivery {
+  font-size: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  background-color: hsl(13, 31%, 94%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.2rem;
+}
+main .confirm-order .type-of-delivery img {
+  margin-right: 0.8rem;
+}
+main .confirm-order .type-of-delivery span {
+  color: hsl(14, 65%, 9%);
+  font-weight: 600;
+}
+main .confirm-order .type-of-delivery.hidden {
+  display: none;
+}
+main .total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+main .total span {
+  font-size: 1.4rem;
+}
+main .total .total-price {
+  color: hsl(14, 65%, 9%);
+  font-weight: 700;
+  font-size: 2rem;
+}
+main button.action-btn {
+  width: 100%;
+  padding: 1.2rem 1.2rem;
+  text-align: center;
+  border: none;
+  border-radius: 2.4rem;
+  background-color: hsl(14, 86%, 42%);
+  color: hsl(20, 50%, 98%);
+  font-weight: 600;
+}
+main button.action-btn:hover {
+  background-color: hsl(14, 86%, 30%);
+}
 
 .menu-section .desserts-container {
   margin-top: 28px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+@media (max-width: 1023px) {
+  .menu-section .desserts-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 450px) {
+  .menu-section .desserts-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 .menu-section .desserts-container .dessert {
   position: relative;
@@ -78,8 +155,8 @@ main {
   width: 210px;
   border-radius: 10px;
 }
-.menu-section .desserts-container .dessert .dessert-img img:active {
-  border: 0.15rem solid hsl(14, 86%, 42%);
+.menu-section .desserts-container .dessert .dessert-img.active img {
+  outline: 0.15rem solid hsl(14, 86%, 42%);
 }
 .menu-section .desserts-container .dessert button.btn {
   border: 1px solid hsl(14, 65%, 9%);
@@ -90,8 +167,8 @@ main {
   transform: translateY(-20px) translateX(40px);
   justify-content: center;
   gap: 0.8rem;
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 1.2rem;
   background-color: #fff;
   align-items: center;
 }
@@ -123,7 +200,7 @@ main {
   width: 15px;
 }
 .menu-section .desserts-container .dessert button.btn.addtocart:hover {
-  border: 0.15rem solid hsl(14, 86%, 42%);
+  outline: 0.15rem solid hsl(14, 86%, 42%);
 }
 .menu-section .desserts-container .dessert .dessert-details {
   transform: translateY(-10px);
@@ -175,14 +252,18 @@ main {
   display: flex;
   justify-content: space-between;
   margin: 1rem 0;
+  align-items: center;
 }
 .cart-container .cartedItems p {
   color: hsl(14, 65%, 9%);
   font-weight: 600;
+  font-size: 1.4rem;
 }
 .cart-container .cartedItems .item-details {
+  margin-top: 0.4rem;
   display: flex;
   gap: 1em;
+  font-size: 1.2rem;
 }
 .cart-container .cartedItems .item-details span:nth-child(1) {
   color: hsl(14, 86%, 42%);
@@ -199,47 +280,107 @@ main {
   background-color: transparent;
   border: 1px solid hsl(12, 20%, 44%);
   border-radius: 50%;
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.2rem;
 }
-.cart-container .confirm-order {
-  margin-top: 2.4rem;
+.cart-container .cartedItems .btn-delete:is(:active, :hover) {
+  border: 1.5px solid hsl(14, 65%, 9%);
+}
+.cart-container .cartedItems .btn-delete:is(:active, :hover) svg path {
+  fill: hsl(14, 65%, 9%);
+}
+.cart-container hr {
+  border: 1px solid hsl(13, 31%, 94%);
+}
+
+.confirmed-container {
+  position: fixed;
+  bottom: 50%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
+  display: grid;
+  place-content: center;
+  transition: all 0.5s;
+}
+.confirmed-container .confirmed-details {
+  background-color: #fff;
+  padding: 2.4rem;
+  width: 44rem;
+  border-radius: 1.2rem;
+}
+@media (max-width: 450px) {
+  .confirmed-container .confirmed-details {
+    max-width: 80%;
+    margin: auto;
+  }
+}
+.confirmed-container .confirmed-details img[alt=order-confirmed] {
+  margin-bottom: 2rem;
+  aspect-ratio: 3/4;
+}
+.confirmed-container .confirmed-details > p {
+  font-size: 1.2rem;
+  color: hsl(14, 25%, 72%);
+}
+.confirmed-container .orders {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  padding: 1.6rem;
+  background-color: hsl(20, 50%, 98%);
+  margin: 2rem 0;
 }
-.cart-container .confirm-order .total {
-  display: flex;
-  justify-content: space-between;
-}
-.cart-container .confirm-order .total .total-price {
-  color: hsl(14, 65%, 9%);
-  font-weight: 700;
-  font-size: 2rem;
-}
-.cart-container .confirm-order .type-of-delivery {
-  font-size: 1.2rem;
-  padding: 0.8rem 1.2rem;
-  background-color: hsl(13, 31%, 94%);
+.confirmed-container .orders .order {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 1.2rem;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  border-bottom: 1px solid hsl(13, 31%, 94%);
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
 }
-.cart-container .confirm-order .type-of-delivery span {
+@media (max-width: 450px) {
+  .confirmed-container .orders .order {
+    font-size: 1rem;
+  }
+}
+.confirmed-container .orders .order .order-details {
+  display: flex;
+  gap: 1rem;
+}
+.confirmed-container .orders .order .order-details img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 2px;
+}
+.confirmed-container .orders .order .order-details .item-name {
   color: hsl(14, 65%, 9%);
+  margin-bottom: 0.8rem;
   font-weight: 600;
 }
-.cart-container .confirm-order button {
-  width: 100%;
-  padding: 1.2rem 1.2rem;
-  text-align: center;
-  border: none;
-  border-radius: 2.4rem;
-  background-color: hsl(14, 86%, 42%);
-  color: hsl(20, 50%, 98%);
-  font-weight: 600;
+.confirmed-container .orders .order .item-price-details {
+  display: flex;
+  gap: 1rem;
+}
+.confirmed-container .orders .order .item-price-details .item-quantity {
+  color: hsl(14, 86%, 42%);
+}
+.confirmed-container .orders .order .item-price-details .item-price {
+  color: hsl(14, 25%, 72%);
+}
+.confirmed-container .orders .order .item-price-details .item-price span {
+  font-size: 1rem;
+}
+.confirmed-container .orders .order .item-totalprice {
+  font-weight: 700;
 }/*# sourceMappingURL=styles.css.map */
